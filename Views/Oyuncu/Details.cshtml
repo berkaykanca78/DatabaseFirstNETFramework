@@ -1,0 +1,83 @@
+﻿@model DatabaseFirstNETFramework.Models.Oyuncu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Oyuncu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Soyadi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soyadi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Yasi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yasi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Maas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SozlesmeSuresi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SozlesmeSuresi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mevki1.MevkiAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mevki1.MevkiAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Takim.TakimAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Takim.TakimAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ulke1.UlkeAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ulke1.UlkeAdi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

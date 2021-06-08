@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DatabaseFirstNETFramework.Models.Oyuncu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Adi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Soyadi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Yasi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Maas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SozlesmeSuresi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mevki1.MevkiAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Takim.TakimAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ulke1.UlkeAdi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Soyadi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Yasi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Maas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SozlesmeSuresi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mevki1.MevkiAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Takim.TakimAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ulke1.UlkeAdi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseFirstModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Mevki">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Oyuncu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TakimID" Type="int" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Soyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Yasi" Type="int" Nullable="false" />
+    <Property Name="Mevki" Type="int" Nullable="false" />
+    <Property Name="Maas" Type="money" Nullable="false" />
+    <Property Name="SozlesmeSuresi" Type="int" Nullable="false" />
+    <Property Name="Ulke" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Takim">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ulke">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Oyuncu_Mevki">
+    <End Role="Mevki" Type="Self.Mevki" Multiplicity="1" />
+    <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mevki">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oyuncu">
+        <PropertyRef Name="Mevki" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oyuncu_Takim">
+    <End Role="Takim" Type="Self.Takim" Multiplicity="1" />
+    <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Takim">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oyuncu">
+        <PropertyRef Name="TakimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oyuncu_Ulke">
+    <End Role="Ulke" Type="Self.Ulke" Multiplicity="1" />
+    <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ulke">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oyuncu">
+        <PropertyRef Name="Ulke" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseFirstModelStoreContainer">
+    <EntitySet Name="Mevki" EntityType="Self.Mevki" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Oyuncu" EntityType="Self.Oyuncu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Takim" EntityType="Self.Takim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ulke" EntityType="Self.Ulke" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Oyuncu_Mevki" Association="Self.FK_Oyuncu_Mevki">
+      <End Role="Mevki" EntitySet="Mevki" />
+      <End Role="Oyuncu" EntitySet="Oyuncu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oyuncu_Takim" Association="Self.FK_Oyuncu_Takim">
+      <End Role="Takim" EntitySet="Takim" />
+      <End Role="Oyuncu" EntitySet="Oyuncu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oyuncu_Ulke" Association="Self.FK_Oyuncu_Ulke">
+      <End Role="Ulke" EntitySet="Ulke" />
+      <End Role="Oyuncu" EntitySet="Oyuncu" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

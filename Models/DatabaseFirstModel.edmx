@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseFirstModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Mevki">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MevkiAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Oyuncu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TakimID" Type="int" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Soyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Yasi" Type="int" Nullable="false" />
+          <Property Name="Mevki" Type="int" Nullable="false" />
+          <Property Name="Maas" Type="money" Nullable="false" />
+          <Property Name="SozlesmeSuresi" Type="int" Nullable="false" />
+          <Property Name="Ulke" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Takim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TakimAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ulke">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UlkeAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Oyuncu_Mevki">
+          <End Role="Mevki" Type="Self.Mevki" Multiplicity="1" />
+          <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mevki">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oyuncu">
+              <PropertyRef Name="Mevki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oyuncu_Takim">
+          <End Role="Takim" Type="Self.Takim" Multiplicity="1" />
+          <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Takim">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oyuncu">
+              <PropertyRef Name="TakimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oyuncu_Ulke">
+          <End Role="Ulke" Type="Self.Ulke" Multiplicity="1" />
+          <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ulke">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oyuncu">
+              <PropertyRef Name="Ulke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseFirstModelStoreContainer">
+          <EntitySet Name="Mevki" EntityType="Self.Mevki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oyuncu" EntityType="Self.Oyuncu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Takim" EntityType="Self.Takim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ulke" EntityType="Self.Ulke" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Oyuncu_Mevki" Association="Self.FK_Oyuncu_Mevki">
+            <End Role="Mevki" EntitySet="Mevki" />
+            <End Role="Oyuncu" EntitySet="Oyuncu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oyuncu_Takim" Association="Self.FK_Oyuncu_Takim">
+            <End Role="Takim" EntitySet="Takim" />
+            <End Role="Oyuncu" EntitySet="Oyuncu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oyuncu_Ulke" Association="Self.FK_Oyuncu_Ulke">
+            <End Role="Ulke" EntitySet="Ulke" />
+            <End Role="Oyuncu" EntitySet="Oyuncu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseFirstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Mevki">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MevkiAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Oyuncus" Relationship="Self.FK_Oyuncu_Mevki" FromRole="Mevki" ToRole="Oyuncu" />
+        </EntityType>
+        <EntityType Name="Oyuncu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TakimID" Type="Int32" Nullable="false" />
+          <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Yasi" Type="Int32" Nullable="false" />
+          <Property Name="Mevki" Type="Int32" Nullable="false" />
+          <Property Name="Maas" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SozlesmeSuresi" Type="Int32" Nullable="false" />
+          <Property Name="Ulke" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mevki1" Relationship="Self.FK_Oyuncu_Mevki" FromRole="Oyuncu" ToRole="Mevki" />
+          <NavigationProperty Name="Takim" Relationship="Self.FK_Oyuncu_Takim" FromRole="Oyuncu" ToRole="Takim" />
+          <NavigationProperty Name="Ulke1" Relationship="Self.FK_Oyuncu_Ulke" FromRole="Oyuncu" ToRole="Ulke" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Takim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TakimAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Oyuncus" Relationship="Self.FK_Oyuncu_Takim" FromRole="Takim" ToRole="Oyuncu" />
+        </EntityType>
+        <EntityType Name="Ulke">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UlkeAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Oyuncus" Relationship="Self.FK_Oyuncu_Ulke" FromRole="Ulke" ToRole="Oyuncu" />
+        </EntityType>
+        <Association Name="FK_Oyuncu_Mevki">
+          <End Role="Mevki" Type="Self.Mevki" Multiplicity="1" />
+          <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mevki">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oyuncu">
+              <PropertyRef Name="Mevki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oyuncu_Takim">
+          <End Role="Takim" Type="Self.Takim" Multiplicity="1" />
+          <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Takim">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oyuncu">
+              <PropertyRef Name="TakimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oyuncu_Ulke">
+          <End Role="Ulke" Type="Self.Ulke" Multiplicity="1" />
+          <End Role="Oyuncu" Type="Self.Oyuncu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ulke">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oyuncu">
+              <PropertyRef Name="Ulke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseFirstNETEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Mevkis" EntityType="Self.Mevki" />
+          <EntitySet Name="Oyuncus" EntityType="Self.Oyuncu" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Takims" EntityType="Self.Takim" />
+          <EntitySet Name="Ulkes" EntityType="Self.Ulke" />
+          <AssociationSet Name="FK_Oyuncu_Mevki" Association="Self.FK_Oyuncu_Mevki">
+            <End Role="Mevki" EntitySet="Mevkis" />
+            <End Role="Oyuncu" EntitySet="Oyuncus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oyuncu_Takim" Association="Self.FK_Oyuncu_Takim">
+            <End Role="Takim" EntitySet="Takims" />
+            <End Role="Oyuncu" EntitySet="Oyuncus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oyuncu_Ulke" Association="Self.FK_Oyuncu_Ulke">
+            <End Role="Ulke" EntitySet="Ulkes" />
+            <End Role="Oyuncu" EntitySet="Oyuncus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseFirstModelStoreContainer" CdmEntityContainer="DatabaseFirstNETEntities">
+          <EntitySetMapping Name="Mevkis">
+            <EntityTypeMapping TypeName="DatabaseFirstModel.Mevki">
+              <MappingFragment StoreEntitySet="Mevki">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MevkiAdi" ColumnName="MevkiAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oyuncus">
+            <EntityTypeMapping TypeName="DatabaseFirstModel.Oyuncu">
+              <MappingFragment StoreEntitySet="Oyuncu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TakimID" ColumnName="TakimID" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="Yasi" ColumnName="Yasi" />
+                <ScalarProperty Name="Mevki" ColumnName="Mevki" />
+                <ScalarProperty Name="Maas" ColumnName="Maas" />
+                <ScalarProperty Name="SozlesmeSuresi" ColumnName="SozlesmeSuresi" />
+                <ScalarProperty Name="Ulke" ColumnName="Ulke" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DatabaseFirstModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Takims">
+            <EntityTypeMapping TypeName="DatabaseFirstModel.Takim">
+              <MappingFragment StoreEntitySet="Takim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TakimAdi" ColumnName="TakimAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ulkes">
+            <EntityTypeMapping TypeName="DatabaseFirstModel.Ulke">
+              <MappingFragment StoreEntitySet="Ulke">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UlkeAdi" ColumnName="UlkeAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
